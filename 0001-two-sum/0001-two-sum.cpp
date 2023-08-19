@@ -1,18 +1,28 @@
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-        vector<pair<int, int>> pi;
-        for (int i = 0; i < nums.size(); i++){
-            pi.push_back({nums[i], i});
+        
+        vector< pair< int, int > > vp;
+        
+        for (int i = 0; i < nums.size(); i++)
+            vp.push_back( {nums[i], i} );
+        
+        
+        sort( vp.begin(), vp.end() );
+        
+        int head = 0, tail = vp.size() - 1;
+        
+        while( head < tail )
+        {
+            int s = vp[head].first + vp[tail].first;
+            
+            if ( s == target ) return { vp[head].second, vp[tail].second };
+            
+            if ( s > target ) tail--;
+            else head++;
+            
         }
-        sort(pi.begin(), pi.end());
-        int l = 0, h = pi.size() - 1;
-        while(l < h){
-            int n = pi[l].first + pi[h].first;
-            if (n < target) l++;
-            else if (n > target) h--;
-            else return {pi[l].second, pi[h].second};
-        }
-        return {pi[l].second, pi[h].second};
+        
+        return {-1, -1};
     }
 };
