@@ -22,13 +22,11 @@ public:
                 for (int k = 0; k < 3; k++){
                     for (int l = 0; l < 3; l++){
                         if ( board[i * 3 + k][j * 3 + l] == '.' ) continue;
-                        cout << board[i * 3 + k][j * 3 + l] - '0';
                         int temp = board[i * 3 + k][j * 3 + l] - '0';
                         if ( m[temp] ) return false;
                         m[temp] = true;
                     }
                 }
-                cout << endl;
             }
         }
         
