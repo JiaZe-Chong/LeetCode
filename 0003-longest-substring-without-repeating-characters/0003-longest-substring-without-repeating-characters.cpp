@@ -11,12 +11,15 @@ public:
             if ( !m[s[right]] ){
                 m[s[right]] = true;
                 right++;
+                mx = max(mx, right - left);
             }
             else{
-                mx = max(mx, right - left);
-                left++;
-                right = left;
-                m.clear();
+                while( m[s[right]] ) {
+                    
+                    m[s[left]] = false;
+                    left++;
+                    
+                }
             }
             
         }
