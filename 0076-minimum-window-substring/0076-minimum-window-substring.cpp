@@ -20,11 +20,13 @@ public:
             }
             
             int len = right - left + 1;
-            if (len > t.size() * 10){
-                ms[s[left]]--;
-                left++;
-            }
-            else if ( !hit ){                
+            if ( !hit ){         
+                
+                while ( ms[s[left]] > mt[s[left]] ){
+                    ms[s[left]]--;
+                    left++;
+                }
+                
                 right++;
                 ms[s[right]]++;
             }
