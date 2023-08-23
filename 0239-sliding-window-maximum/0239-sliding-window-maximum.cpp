@@ -21,8 +21,6 @@ public:
                 dq.push_front( right );
             } 
                 
-            
-            
             if ( right - left + 1 == k ){
                 ans.push_back( nums[dq.back()] );
                 left++;
@@ -30,7 +28,6 @@ public:
                 if ( dq.back() < left ) dq.pop_back();
             }
             else{
-                
                 right++;
             } 
             
