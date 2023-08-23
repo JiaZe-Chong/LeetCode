@@ -24,19 +24,13 @@ public:
             if ( right - left + 1 == k ){
                 ans.push_back( nums[dq.back()] );
                 left++;
-                right++;
                 if ( dq.back() < left ) dq.pop_back();
             }
-            else{
-                right++;
-            } 
-            
-            
-            
+
+            right++;
+
             
         }
-        
-        
         
         return ans;
     }
