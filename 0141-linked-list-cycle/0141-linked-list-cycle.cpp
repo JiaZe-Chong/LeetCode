@@ -9,12 +9,17 @@
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
-        vector<ListNode*> check;
-        while(head != nullptr){
-            for (auto a : check) if (a == head) return true;
-            check.push_back(head);
+        
+        unordered_map < ListNode*, bool > m;
+        
+        while ( head ) {
+             
+            if ( m[head] ) return true;
+            m[head] = true;
             head = head -> next;
         }
+        
         return false;
+        
     }
 };
