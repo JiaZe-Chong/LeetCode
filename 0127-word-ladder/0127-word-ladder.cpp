@@ -16,7 +16,6 @@ public:
                 q.pop();
                 
                 if ( cur == endWord ) return result;
-                //us.erase( cur );
                 
                 for (int i = 0 ; i < cur.length(); i++){
                     char c = cur[i];
