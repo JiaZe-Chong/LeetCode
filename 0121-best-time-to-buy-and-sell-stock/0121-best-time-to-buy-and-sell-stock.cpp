@@ -1,22 +1,13 @@
 class Solution {
 public:
     int maxProfit(vector<int>& prices) {
+        int withStock = INT_MIN, withoutStock = 0;
         
-        int left = 0, right = 1;
-        int dif = 0;
-        
-        while (right < prices.size()) {
-            
-            if ( prices[right] < prices[left] ){
-                left = right;
-            }
-            else if ( dif < prices[right] - prices[left] ){
-                dif = prices[right] - prices[left];
-            }
-            right++;
-            
+        for (int p : prices) {
+            withoutStock = max(withoutStock, withStock + p);
+            withStock = max(withStock, -p);
         }
         
-        return dif;
+        return withoutStock;
     }
 };
