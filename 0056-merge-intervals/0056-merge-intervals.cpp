@@ -4,7 +4,7 @@ public:
         sort(intervals.begin(), intervals.end());
         vector<vector<int>> ans;
         
-        for (auto interval : intervals) {
+        for (const auto& interval : intervals) {
             if (!ans.size() || interval[0] > ans[ans.size() - 1][1]) {
                 ans.push_back(interval);
             }
