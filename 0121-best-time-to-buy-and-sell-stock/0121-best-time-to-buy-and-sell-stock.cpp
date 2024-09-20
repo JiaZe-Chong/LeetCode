@@ -1,13 +1,14 @@
 class Solution {
 public:
     int maxProfit(vector<int>& prices) {
-        int withStock = INT_MIN, withoutStock = 0;
+        int min_price = INT_MAX;
+        int earn = 0;
         
-        for (int p : prices) {
-            withoutStock = max(withoutStock, withStock + p);
-            withStock = max(withStock, -p);
+        for (int price : prices) {
+            min_price = min(min_price, price);
+            earn = max(earn, price - min_price);
         }
         
-        return withoutStock;
+        return earn;        
     }
 };
