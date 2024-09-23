@@ -1,24 +1,14 @@
 class Solution {
 public:
     string reversePrefix(string word, char ch) {
-        stack<char> stk;
         
-        for (char c : word) {
-            stk.push(c);
-            if (c == ch)
-                break;
-        }
+        int ind = word.find(ch);
         
-        if (stk.size() == word.size() && ch != word[word.size() - 1])
+        if (ind == string::npos)
             return word;
         
-        string ans = "";
-        int i = stk.size();
-        while(stk.size()) {
-            ans += stk.top();
-            stk.pop();
-        }
+        reverse(word.begin(), word.begin() + ind + 1);
         
-        return ans + word.substr(i);
+        return word;
     }
 };
