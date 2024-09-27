@@ -22,14 +22,18 @@ public:
             if (i == m - 1 && j == n - 1)
                 return cost[i][j];
 
-            if (i != m - 1 && cost[i+1][j] > cost[i][j] + grid[i + 1][j]) {
-                cost[i + 1][j] = cost[i][j] + grid[i + 1][j];
-                pq.push({i + 1, j});
+            if (i != m - 1) {
+                if (cost[i+1][j] == INT_MAX) {
+                    cost[i + 1][j] = cost[i][j] + grid[i + 1][j];
+                    pq.push({i + 1, j});
+                }
             }
 
-            if (j != n - 1 && cost[i][j+1] > cost[i][j] + grid[i][j + 1]) {
-                cost[i][j+1] = cost[i][j] + grid[i][j + 1];
-                pq.push({i, j + 1});
+            if (j != n - 1) {
+                if (cost[i][j+1] == INT_MAX) {
+                    cost[i][j+1] = cost[i][j] + grid[i][j + 1];
+                    pq.push({i, j + 1});
+                }
             }
 
         }
