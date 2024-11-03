@@ -4,7 +4,7 @@ public:
         int cur = 0;
         int ans = 0;
         
-        for (int i : gain) {
+        for (const auto& i : gain) {
             cur += i;
             ans = max(ans, cur);
         }
