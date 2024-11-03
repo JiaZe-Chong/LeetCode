@@ -9,7 +9,6 @@ public:
                 if (i < flowerbed.size() - 1 && flowerbed[i+1])
                     continue;
                 
-                cout << i << endl;
                 flowerbed[i] = 1;
                 n--;
             }
