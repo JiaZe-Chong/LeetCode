@@ -1,29 +1,21 @@
 class Solution {
 public:
     vector<int> asteroidCollision(vector<int>& asteroids) {
+        deque<int> dq;
         vector<int> ans;
-        deque<int> pos;
         
-        for (int i : asteroids) {
-            
-            if ( i < 0 && pos.empty() ) ans.push_back(i);
-            else if ( i < 0 ) {
-                
-                while ( pos.size() && pos.back() < abs(i) ) pos.pop_back();
-                
-                
-                if ( pos.empty() ) ans.push_back(i);
-                else if ( pos.back() == abs(i) ) pos.pop_back();
-                
+        for (int asteroid : asteroids) {
+            if (asteroid > 0) dq.push_back(asteroid);
+            else {
+                while (dq.size() && -asteroid > dq.back()) dq.pop_back();
+                if (dq.empty()) ans.push_back(asteroid);
+                else if (dq.back() == -asteroid) dq.pop_back();
             }
-            else pos.push_back(i);
-            
-            
         }
         
-        while(pos.size()) {
-            ans.push_back(pos.front());
-            pos.pop_front();
+        while (dq.size()) {
+            ans.push_back(dq.front());
+            dq.pop_front();
         }
         
         return ans;
