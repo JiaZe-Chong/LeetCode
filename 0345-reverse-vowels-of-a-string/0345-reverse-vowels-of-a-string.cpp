@@ -1,33 +1,25 @@
 class Solution {
 public:
-    bool isVowel(char c) {
-        return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' ||
-               c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U';
+    int isVowel(char c) {
+        return c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U' ||
+               c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';
     }
     
     string reverseVowels(string s) {
+        stack<char> stk;
         
-        int left = 0;
-        int right = s.length() - 1;
+        for (const auto& c : s) {
+            if (isVowel(c))
+                stk.push(c);
+        }
         
-        while(left < right) {
-            
-            while (left != s.length() && !isVowel(s[left])) 
-                left++;
-            while (right != 0 && !isVowel(s[right]))
-                right--;
-                   
-            if (right <= left) break;
-                   
-            char temp = s[left];
-            s[left] = s[right];
-            s[right] = temp;
-            left++;
-            right--;
-                   
+        for (auto& c : s) {
+            if (isVowel(c)) {
+                c = stk.top();
+                stk.pop();
+            }
         }
         
         return s;
-        
     }
 };
