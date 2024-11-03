@@ -3,14 +3,15 @@ public:
     bool uniqueOccurrences(vector<int>& arr) {
         unordered_map<int, int> m;
         
-        for (int i : arr) m[i]++;
+        for (int i : arr)
+            m[i]++;
         
-        set<int> s;
+        unordered_set<int> s;
         
-        for (auto it : m) {
-            int i = it.second;
-            if (s.find(i) == s.end()) s.insert(i);
-            else return false;
+        for (const auto& [key, value] : m) {
+            if (s.contains(value))
+                return false;
+            s.insert(value);
         }
         
         return true;
