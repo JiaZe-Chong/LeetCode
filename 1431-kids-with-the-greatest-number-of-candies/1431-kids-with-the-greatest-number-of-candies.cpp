@@ -1,14 +1,15 @@
 class Solution {
 public:
     vector<bool> kidsWithCandies(vector<int>& candies, int extraCandies) {
-        vector<bool> ans(candies.size());
+        int threshold = -1;
+        for (const auto& candy : candies) {
+            threshold = max(threshold, candy);
+        }
         
-        int tempMax = -1;
-        for (int i : candies)
-            tempMax = max(i, tempMax);
-        
-        for (int i = 0; i < candies.size(); i++)
-            ans[i] = candies[i] + extraCandies >= tempMax;
+        vector<bool> ans;
+        for (const auto& candy : candies) {
+            ans.push_back(candy + extraCandies >= threshold);
+        }
         
         return ans;
     }
