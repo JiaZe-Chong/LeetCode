@@ -1,29 +1,27 @@
 class Solution {
 public:
     string predictPartyVictory(string senate) {
-        queue<int> rad, dir;
-        
-        int round = 0;
-        
-        for (; round < senate.length(); round++){
-            if (senate[round] == 'R') rad.push(round);
-            else if (senate[round] == 'D') dir.push(round);
+        queue<int> radiant, dire;
+        int i = 0;
+        for (; i < senate.length(); i++) {
+            if (senate[i] == 'R') radiant.push(i);
+            else dire.push(i);
         }
         
-        while(rad.size() != 0 && dir.size() != 0) {
+        while(radiant.size() && dire.size()) {
+            int r = radiant.front();
+            int d = dire.front();
+            dire.pop();
+            radiant.pop();
             
-            int r = rad.front();
-            int d = dir.front();
-            
-            rad.pop();
-            dir.pop();
-            
-            if (d < r) dir.push(round);
-            else rad.push(round);
-            
-            round++;
+            if (r < d) {
+                radiant.push(i++);   
+            }
+            else {
+                dire.push(i++);
+            }
         }
         
-        return rad.size() == 0 ? "Dire" : "Radiant"; 
+        return radiant.size() ? "Radiant" : "Dire";
     }
 };
