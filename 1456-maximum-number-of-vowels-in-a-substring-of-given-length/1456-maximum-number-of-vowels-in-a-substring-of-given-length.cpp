@@ -1,24 +1,21 @@
 class Solution {
 public:
-    bool isVowel(const char& c) {
-        return c == 'a' || c == 'e' || c == 'i' || c =='o' || c == 'u';
+    bool isVowel(char c) {
+        return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';
     }
     
     int maxVowels(string s, int k) {
-        int ans = 0;
-        int cur = 0;
+        int left = 0, right = 0, count = 0, ans = 0;
         
-        for (int i = 0; i < s.length(); i++) {
+        while (right < s.length()) {
+            count += isVowel(s[right++]);
             
-            if (i >= k) {
-                ans = max(ans, cur);
-                if (isVowel(s[i - k])) cur--;
+            if (right - left == k) {
+                ans = max(ans, count);
+                count -= isVowel(s[left++]);
             }
-            
-            if (isVowel(s[i])) cur++;
-            
         }
         
-        return max(ans, cur);
+        return ans;
     }
 };
