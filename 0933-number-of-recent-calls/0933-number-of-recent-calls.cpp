@@ -5,14 +5,12 @@ public:
     }
     
     int ping(int t) {
-        req.push_back(t);
-        
-        while(req.front() < t - 3000) req.pop_front();
-        
-        return req.size();
+        q.push(t);
+        while (q.front() < t - 3000) q.pop();
+        return q.size();
     }
     
-    deque<int> req;
+    queue<int> q;
 };
 
 /**
