@@ -11,22 +11,19 @@
 class Solution {
 public:
     ListNode* oddEvenList(ListNode* head) {
-        if (!head) return nullptr;
+        if(!head || !head->next || !head->next->next) return head;
         
-        ListNode* second = new ListNode();
-        ListNode* secondHead = second;
-        ListNode* first = head;
+        ListNode *odd = head;
+        ListNode *even = head->next;
+        ListNode *even_start = head->next;
         
-        while (first->next) {
-            second->next = first->next;
-            second = second->next;
-            if (!first->next->next) break;
-            first->next = first->next->next;
-            first = first->next;
+        while(odd->next && even->next){
+            odd->next = even->next; //Connect all odds
+            even->next = odd->next->next;  //Connect all evens
+            odd = odd->next;
+            even = even->next;
         }
-        second->next = nullptr;
-        first->next = secondHead->next;
-        
-        return head;
+        odd->next = even_start;   //Place the first even node after the last odd node.
+        return head; 
     }
 };
