@@ -1,26 +1,23 @@
 class Solution {
 public:
     bool closeStrings(string word1, string word2) {
-        vector<int> v1(26, 0);
-        vector<int> v2(26, 0);
+        array<int, 26> arr1;
+        array<int, 26> arr2;
         
-        for (char c : word1) v1[c - 'a']++;
-        for (char c : word2) v2[c - 'a']++;
+        for (char c : word1) arr1[c - 'a']++;
+        for (char c : word2) arr2[c - 'a']++;
         
         for (int i = 0; i < 26; i++) {
-            
-            if ( (v1[i] && !v2[i]) || (v2[i] && !v1[i]) )
-                return false;
-            
+            if ((bool)arr1[i] != (bool)arr2[i]) return false;
         }
         
-        sort(v1.begin(), v1.end());
-        sort(v2.begin(), v2.end());
+        sort(arr1.begin(), arr1.end());
+        sort(arr2.begin(), arr2.end());
         
-        for (int i = 0; i < 26; i++)
-            if (v1[i] != v2[i])
-                return false;
-    
-        return true;        
+        for (int i = 0; i < 26; i++) {
+            if (arr1[i] != arr2[i]) return false;
+        }
+        
+        return true;
     }
 };
