@@ -12,19 +12,28 @@
 class Solution {
 public:
     int goodNodes(TreeNode* root) {
-        int ans = 0;
-        dfs( root, root->val, ans );
-        return ans;
+        vector<int> path;
+        return utility(root, path);
     }
     
-    void dfs( TreeNode* root, int mx, int& num ) {
+    int utility(TreeNode* root, vector<int>& path) {
+        if (!root)
+            return 0;
         
-        if ( !root ) return;
+        int ans = 0;
         
-        if ( root->val >= mx ) num++;
+        bool good = true;
+        for (int i : path)
+            if (i > root->val)
+                good = false;
+        if (good)
+            ans++;
         
-        mx = max(mx, root->val);
-        dfs( root->left, mx, num );
-        dfs( root->right, mx, num );
+        path.push_back(root->val);
+        ans += utility(root->left, path);
+        ans += utility(root->right, path);
+        path.pop_back();
+        
+        return ans;
     }
 };
