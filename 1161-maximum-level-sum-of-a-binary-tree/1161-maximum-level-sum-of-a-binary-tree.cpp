@@ -12,49 +12,28 @@
 class Solution {
 public:
     int maxLevelSum(TreeNode* root) {
-        
-        int maxLevel = -1;
-        queue<int> l;
+        int ans = 1;
+        int mx = root->val;
+        int level = 0;
         queue<TreeNode*> q;
+        
         q.push(root);
-        l.push(0);
-        vector<int> sum;
-        
-        while(l.size()) {
-            TreeNode* node = q.front();
-            int level = l.front();
-            q.pop();
-            l.pop();
-            
-            if (level > maxLevel){
-                maxLevel++;
-                sum.push_back(0);
+        while(q.size()) {
+            int num = q.size();
+            int cur = 0;
+            level++;
+            while (num--) {
+                TreeNode* node = q.front();
+                cur += node->val;
+                if (node->left) q.push(node->left);
+                if (node->right) q.push(node->right);
+                q.pop();
             }
-            
-            sum[level] += node->val;
-            
-            if (node->left) {
-                q.push(node->left);
-                l.push(level + 1);
-            }
-            
-            if (node->right) {
-                q.push(node->right);
-                l.push(level + 1);
+            if (cur > mx) {
+                mx = cur;
+                ans = level;
             }
         }
-        
-        vector<pair<int, int>> sumLevel;
-        for (int i = 0; i < sum.size(); i++) {
-            sumLevel.push_back({sum[i], i});
-        }
-        
-        sort(sumLevel.begin(), sumLevel.end());
-        int target = sumLevel[maxLevel].first;
-        for (auto a : sumLevel)
-            if (a.first == target)
-                return a.second + 1;
-        
-        return sumLevel[maxLevel].second + 1;
+        return ans;
     }
 };
