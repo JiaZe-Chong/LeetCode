@@ -12,22 +12,20 @@
 class Solution {
 public:
     bool leafSimilar(TreeNode* root1, TreeNode* root2) {
-        return val(root1) == val(root2);
+        return toVec(root1) == toVec(root2);
     }
     
-private:
-    vector<int> val(TreeNode* node) {
+    vector<int> toVec(TreeNode* root) {
+        if (!root->left && !root->right)
+            return {root->val};
         
         vector<int> ans;
-        
-        if ( !node->left && !node->right ) return {node->val};
-        
-        if ( node->left )
-            for (int i : val(node->left))
+        if (root->left) 
+            for (int i : toVec(root->left))
                 ans.push_back(i);
         
-        if ( node->right )
-            for (int i : val(node->right))
+        if (root->right)
+            for (int i : toVec(root->right))
                 ans.push_back(i);
         
         return ans;
